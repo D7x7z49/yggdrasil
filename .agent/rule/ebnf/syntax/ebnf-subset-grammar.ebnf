@@ -1,0 +1,85 @@
+(* .agent/rule/ebnf/syntax/ebnf-subset-grammar.ebnf *)
+(* ebnf subset version: 1 *)
+(* format: two-space indent; rule name, =, expression, and ; use separate lines *)
+
+(* ========================================================================== *)
+(* EBNF SUBSET GRAMMAR                                                        *)
+(* ========================================================================== *)
+
+grammar
+  = { production | comment | blank }
+  ;
+
+production
+  = identifier, eol, "  = ", alternative, { eol, "  | ", alternative }, eol, "  ;", eol
+  ;
+
+alternative
+  = sequence
+  ;
+
+sequence
+  = factor, { ", ", factor }
+  ;
+
+factor
+  = optional
+  | repetition
+  | group
+  | terminal
+  | special
+  | identifier
+  ;
+
+expression
+  = alternative, { " | ", alternative }
+  ;
+
+optional
+  = "[ ", expression, " ]"
+  ;
+
+repetition
+  = "{ ", expression, " }"
+  ;
+
+group
+  = "( ", expression, " )"
+  ;
+
+terminal
+  = ? a double-quoted string with backslash escapes ?
+  ;
+
+special
+  = ? a question-mark delimited special sequence ?
+  ;
+
+comment
+  = "(*", { character }, "*)", eol
+  ;
+
+identifier
+  = letter, { letter | digit | "_" | "-" }
+  ;
+
+letter
+  = ? unicode letter ?
+  ;
+
+digit
+  = ? unicode digit ?
+  ;
+
+character
+  = ? any character except the comment terminator ?
+  ;
+
+blank
+  = eol
+  ;
+
+eol
+  = "\n"
+  | "\r\n"
+  ;

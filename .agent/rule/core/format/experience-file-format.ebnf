@@ -1,0 +1,92 @@
+(* .agent/rule/core/format/experience-file-format.ebnf *)
+(* ebnf subset version: 1 *)
+(* format: two-space indent; rule name, =, expression, and ; use separate lines *)
+
+(* ========================================================================== *)
+(* EXPERIENCE FILE FORMAT                                                     *)
+(* ========================================================================== *)
+
+(* path: .agent/experience/<target>/<aspect>/<name>.exp.md *)
+experience_file
+  = header , body , footer
+  ;
+
+(* ========================================================================== *)
+(* HEADER                                                                     *)
+(* ========================================================================== *)
+
+header
+  = path_comment , desc_comment, eol
+  ;
+
+path_comment
+  = "<!--", path, "-->", eol
+  ;
+
+desc_comment
+  = "<!--", desc, "-->", eol
+  ;
+
+path
+  = ? a file system path or URL link ?
+  ;
+
+desc
+  = ? regex:/[^\n\r]*/ ?
+  ;
+
+(* ========================================================================== *)
+(* BODY                                                                       *)
+(* ========================================================================== *)
+
+body
+  = steps, [ notes ]
+  ;
+
+steps
+  = "STEP.", eol, step , eol
+  ;
+
+notes
+  = "NOTE.", eol, note , eol
+  ;
+
+step
+  = line, { line }
+  ;
+
+note
+  = line, { line }
+  ;
+
+line
+  = "-", text, eol
+  ;
+
+(* ========================================================================== *)
+(* FOOTER                                                                     *)
+(* ========================================================================== *)
+
+footer
+  = "---", eol
+  ;
+
+(* ========================================================================== *)
+(* BASIC ELEMENTS                                                             *)
+(* ========================================================================== *)
+
+(*
+  NONE.
+  - os path or command must use commonmark inline code syntax
+    e.g. `/tmp/hi.tmp`, `echo "hello world!"`
+  - link must use commonmark link syntax
+    e.g. [label](url)
+*)
+text
+  = ? regex:/[^\n\r]*/ ?
+  ;
+
+eol
+  = "\n"
+  | "\r\n"
+  ;
