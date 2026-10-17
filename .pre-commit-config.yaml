@@ -1,0 +1,35 @@
+# @path[.pre-commit-config.yaml]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/D7x7z49/fix-headers-hook
+    rev: v0.3.0
+    hooks:
+      - id: fix-headers
+        files: '^(?:\.pre-commit-config\.yaml|pyproject\.toml|Makefile|Dockerfile)$|^(?:\.agent|src|tests|scripts|docs|examples)/'
+
+  - repo: https://github.com/D7x7z49/lint-editor
+    rev: v0.1.1
+    hooks:
+      - id: lint-editor
+
+  - repo: local
+    hooks:
+      - id: check-agent-layout
+        name: check .agent layout
+        entry: uv run --locked python scripts/ci/check-agent-layout.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
