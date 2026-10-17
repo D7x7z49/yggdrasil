@@ -1,0 +1,4 @@
+# .gitattributes
+
+# Normalize line endings in the repository
+* text=auto eol=lf

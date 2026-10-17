@@ -1,0 +1,115 @@
+# .gitignore
+# ==============================================================================
+# EFFECT
+# - [ignore]: drop a path
+# - [keep]: restore a path an [ignore] rule dropped
+#
+# OWNER
+# - [default]: the operating system, editors, and language-agnostic paths
+# - [python], [c], [zig]: one partition per language
+#
+# LIFECYCLE
+# - each stage is named by the line comment above its group
+# - [environment], [intermediate], [state], [output], [distribution], [verification], [secrets]
+#
+# ORDER
+# - order blocks by [owner], then [effect]
+# - a [keep] block follows the [ignore] block it overrides
+#
+# ENTRY
+# - order entries inside a block common to rare, generic first
+# - equal rank falls back to match, then shape, then name
+# - match: any level before root-anchored
+# - shape: file before directory
+# - name: explicit before hidden
+
+# ==============================================================================
+# [ignore:default]
+# ==============================================================================
+
+# operating system
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# editor
+.idea/
+.vscode/*
+
+# output
+build/
+dist/
+out/
+target/
+_build/
+coverage/
+
+# intermediate
+.cache/
+tmp/
+
+# state
+.apiscope/
+
+# secrets
+.env
+
+# ==============================================================================
+# [keep:default]
+# ==============================================================================
+
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# ==============================================================================
+# [ignore:python]
+# ==============================================================================
+
+# environment
+.venv/
+.pdm-python
+
+# intermediate
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# verification
+.coverage
+htmlcov/
+
+# distribution
+*.egg-info/
+
+# ==============================================================================
+# [ignore:c]
+# ==============================================================================
+
+# intermediate
+*.o
+*.obj
+
+# output
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.dSYM/
+
+# ==============================================================================
+# [ignore:zig]
+# ==============================================================================
+
+# intermediate
+.zig-cache/
+
+# output
+zig-out/
+zig-pkg/
