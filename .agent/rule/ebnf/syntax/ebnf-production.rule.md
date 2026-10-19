@@ -1,10 +1,5 @@
-<!-- @path[.agent/rule/ebnf/syntax/ebnf-format-style.rule.md] -->
-<!-- NOTE: formatting choices for the ebnf subset. -->
-
-VERSION
-- use ebnf subset version 1
-- treat `ebnf-subset-grammar.ebnf` as the source of truth for syntax
-- treat this file as the source of truth for layout
+<!-- @path[.agent/rule/ebnf/syntax/ebnf-production.rule.md] -->
+<!-- production layout, indentation, and terminals for the ebnf subset -->
 
 LAYOUT
 - put each production on its own block
@@ -25,17 +20,5 @@ TERMINALS
 - wrap lexical descriptions in `? ... ?`
 - keep comma separators as `, `
 - keep spaces inside `[ ... ]`, `{ ... }`, and `( ... )`
-
-COMMENTS
-- use `(* ... *)`
-- put comments on their own lines
-- keep comment text lowercase
-- use section comments for larger grammar groups
-
-FILES
-- start with a path comment
-- state `ebnf subset version: 1`
-- state the format rule
-- end with one final newline
 
 ---

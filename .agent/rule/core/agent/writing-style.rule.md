@@ -17,16 +17,4 @@ PROSE
 - end a complete statement with a period
 - omit the trailing period on list items, short notes, and fragments
 
-STRUCTURE
-- start a section with an ALL CAPS label on its own line
-- put the section body on indented lines or a dashed list
-- use one indented paragraph for a single topic
-- use a dashed list for multiple rules
-
-PRECEDENCE
-- let case govern word shape
-- let delimiters and prose govern word combination
-- let structure govern document blocks
-- keep structure independent from inline rules
-
 ---

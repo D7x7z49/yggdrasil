@@ -1,9 +1,7 @@
-<!-- @path[.agent/rule/git/commit/conventional-commits.rule.md] -->
-`Conventional Commits` strict subset rules explained.
+(* .agent/rule/git/commit/conventional-commits.ebnf *)
+(* ebnf subset version: 1 *)
+(* format: two-space indent; rule name, =, expression, and ; use separate lines *)
 
-This is a stricter subset of the `Conventional Commits v1.0.0` specification.
-
-```ebnf
 (* ========================================================================== *)
 (* TOP‑LEVEL STRUCTURE                                                        *)
 (* ========================================================================== *)
@@ -55,8 +53,8 @@ body_entry
   ;
 
 (*
-  Each body entry is exactly one line. Do not wrap.
-  Split long points into shorter entries.
+  each body entry is exactly one line. do not wrap.
+  split long points into shorter entries.
 *)
 
 (* ========================================================================== *)
@@ -105,8 +103,3 @@ eol
   = "\n"
   | "\r\n"
   ;
-```
-
-This defines the strict subset convention of `Conventional Commits`.
-
----

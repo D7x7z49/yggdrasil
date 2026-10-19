@@ -2,7 +2,7 @@
 <!-- How to draft a git commit message block -->
 
 STEP.
-- see the conventional commits spec at `.agent/rule/git/commit/conventional-commits.rule.md`
+- see the conventional commits spec at `.agent/rule/git/commit/conventional-commits.ebnf`
 - run `git --no-pager diff --staged` to review changes
 - write the commit message block in `./tmp/commit.tmp`
 

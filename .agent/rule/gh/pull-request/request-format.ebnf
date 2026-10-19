@@ -1,9 +1,7 @@
-<!-- @path[.agent/rule/gh/pull-request/request-format.rule.md] -->
-This document defines the Pull Request format for this project.
+(* .agent/rule/gh/pull-request/request-format.ebnf *)
+(* ebnf subset version: 1 *)
+(* format: two-space indent; rule name, =, expression, and ; use separate lines *)
 
-A Pull Request consists of a `title` and a `description`.
-
-```ebnf
 (* ========================================================================== *)
 (* TOP‑LEVEL: Pull Request structure                                          *)
 (* ========================================================================== *)
@@ -94,8 +92,3 @@ url
 number
   = ? regex:/\d+/ ?
   ;
-```
-
-This concludes the Pull Request format specification.
-
----

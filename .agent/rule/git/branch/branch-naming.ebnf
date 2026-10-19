@@ -1,8 +1,7 @@
-<!-- @path[.agent/rule/git/branch/branch-naming.rule.md] -->
+(* .agent/rule/git/branch/branch-naming.ebnf *)
+(* ebnf subset version: 1 *)
+(* format: two-space indent; rule name, =, expression, and ; use separate lines *)
 
-This document explains the Git branch naming rules for the project.
-
-```ebnf
 (* ========================================================================== *)
 (* TOP‑LEVEL: Branch name is either planned work or a community ticket        *)
 (* ========================================================================== *)
@@ -48,8 +47,3 @@ number
 identifier
   = ? regex:/[A-Za-z][A-Za-z0-9]*/ ?
   ;
-```
-
-The rules above define all valid branch names for this repository.
-
----
