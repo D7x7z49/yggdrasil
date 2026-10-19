@@ -6,13 +6,13 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help setup install hooks lock lock-check agent-check check clean reset
+.PHONY: help setup install hooks lock lock-check agent-check check check-duplicate-extraction clean reset
 
 # OVERVIEW
 # --------
 help:  ## show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-14s %s\n", $$1, $$2}'
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-26s %s\n", $$1, $$2}'
 
 # SETUP
 # -----
@@ -39,6 +39,11 @@ agent-check:  ## check the .agent directory layout
 
 check: lock-check  ## run the full local check
 	uv run --locked pre-commit run --all-files --show-diff-on-failure
+
+# TOOLS
+# -----
+check-duplicate-extraction:  ## judge one extraction within a listed root
+	@uv run --locked python scripts/tools/check-duplicate-extraction.py "$(TASK)"
 
 # CLEAN
 # -----

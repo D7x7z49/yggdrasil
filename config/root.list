@@ -1,0 +1,5 @@
+# @path[config/root.list]
+# ---
+# package roots for repository checks
+# one root per line, relative to the project root
+# a root is a distributable package or module, not any directory
