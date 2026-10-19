@@ -18,6 +18,7 @@ repos:
     hooks:
       - id: fix-headers
         files: '^(?:\.pre-commit-config\.yaml|pyproject\.toml|Makefile|Dockerfile)$|^(?:\.agent|src|tests|scripts|docs|examples)/'
+        exclude: '^\.agent/skill/.+/SKILL\.md$'
 
   - repo: https://github.com/D7x7z49/lint-editor
     rev: v0.1.1

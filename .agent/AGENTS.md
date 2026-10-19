@@ -7,15 +7,18 @@ PURPOSE
 - it does not replace the rule files
 
 LAYOUT
-- `.agent` has two directories, `experience` and `rule`
+- `.agent` has three directories, `experience`, `rule`, and `skill`
 - `AGENTS.md` is the only root file
-- every entry uses two levels, target then aspect
+- experience and rule entries are files, placed at target then aspect
+- a skill entry is a directory, placed at target then aspect, then skill name
+- a skill directory holds `SKILL.md`
 
 PATH
-- locate an entry by target and aspect
-- use the file suffix to identify the category
+- use the file suffix to identify experience and rule
 - use `.exp.md` for experience
 - use `.rule.md` or `.ebnf` for rule
+- locate a skill by target, aspect, then skill name
+- a skill directory holds `SKILL.md` and optional `scripts/` and `references/`
 
 READING
 - read this map first
@@ -23,6 +26,7 @@ READING
 - read a tool rule before experience
 - read experience only when context matters
 - read grammar only when shape or format matters
+- read a skill only when its description matches the task
 
 EXPERIENCE
 - treat experience as episodic, contextual, and stateful
@@ -33,6 +37,12 @@ RULE
 - treat rule as normative, abstract, and stateless or class-state
 - use it for action and validation
 - let rule win when rule and experience conflict
+
+SKILL
+- treat skill as procedural and situational, not normative
+- use it for the task at hand, not for general policy
+- keep the deterministic part in `scripts/` and detail in `references/`
+- let rule win when a skill and a rule conflict
 
 GRAMMAR
 - treat grammar as structure, not behavior
