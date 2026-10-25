@@ -21,9 +21,11 @@ repos:
         exclude: '^\.agent/skill/.+/SKILL\.md$'
 
   - repo: https://github.com/D7x7z49/lint-editor
-    rev: v0.1.1
+    rev: v0.4.0
     hooks:
       - id: lint-editor
+      - id: lint-path
+      - id: lint-commit
 
   - repo: local
     hooks:

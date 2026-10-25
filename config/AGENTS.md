@@ -8,6 +8,7 @@ PURPOSE
 
 FILES
 - `root.list` holds package roots for repository checks
+- `lint-commit.toml` holds commit types and path rules for `lint-commit`
 - each file describes its own syntax in its header
 
 ADDING

@@ -1,0 +1,70 @@
+# @path[config/lint-commit.toml]
+# commit types and path rules for the lint-commit hook
+
+# ==============================================================================
+# TYPES
+# ==============================================================================
+# one entry per accepted commit type
+# the value states the claim the type makes
+
+[types]
+# behavior
+feat = "new user visible feature"
+fix = "bug fix"
+perf = "performance improvement"
+
+# no behavior change
+docs = "documentation only"
+style = "formatting only"
+refactor = "behavior preserving change"
+test = "test only change"
+
+# maintenance
+build = "build or packaging change"
+ci = "continuous integration change"
+chore = "maintenance work"
+revert = "revert earlier commit"
+
+# ==============================================================================
+# RULES
+# ==============================================================================
+# gitignore style patterns, mapped to the types a path may use
+# the last matching rule wins, so order general rules before specific ones
+# the catch-all covers any path without a specific rule
+
+[rules]
+# default: a path with no specific rule is maintenance
+"**" = ["chore"]
+
+# documentation and examples
+"*.md" = ["docs", "chore"]
+"LICENSE" = ["docs", "chore"]
+"docs/**" = ["docs", "chore"]
+"examples/**" = ["docs", "chore"]
+
+# agent knowledge: rules, experience, skills
+".agent/**" = ["docs", "chore"]
+
+# source and tests
+"src/**" = ["feat", "fix", "refactor", "perf", "style"]
+"tests/**" = ["test", "fix", "refactor"]
+
+# tooling: ci checks and local tools
+"scripts/ci/**" = ["ci", "chore"]
+"scripts/tools/**" = ["chore"]
+
+# workflows, hooks, and tasks
+".github/**" = ["ci", "chore"]
+".pre-commit-config.yaml" = ["ci", "chore"]
+"Makefile" = ["build", "chore", "ci"]
+
+# packaging
+"pyproject.toml" = ["build", "chore"]
+"uv.lock" = ["build", "chore"]
+
+# configuration
+"config/**" = ["chore", "build", "ci"]
+".pi/**" = ["chore"]
+".editorconfig" = ["chore", "style"]
+".gitattributes" = ["chore", "style"]
+".gitignore" = ["chore"]

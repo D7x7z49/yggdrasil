@@ -22,7 +22,7 @@ install:  ## install dependencies from the lockfile
 	uv sync --locked
 
 hooks: install  ## install the pre-commit git hooks
-	uv run --locked pre-commit install --install-hooks
+	uv run --locked pre-commit install --hook-type pre-commit --hook-type commit-msg
 
 # LOCKFILE
 # --------
