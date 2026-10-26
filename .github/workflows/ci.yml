@@ -13,10 +13,12 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  UV_VERSION: "0.13.1"
+  PYTHON_VERSION: "3.12"
+
 jobs:
-  checks:
-    permissions:
-      contents: read
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -26,9 +28,15 @@ jobs:
 
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          version: "0.13.1"
-          python-version: "3.12"
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
           enable-cache: true
+
+      - name: restore pre-commit cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: "~/.cache/pre-commit"
+          key: pre-commit-${{ runner.os }}-${{ runner.arch }}-py${{ env.PYTHON_VERSION }}-${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: check lockfile
         run: uv lock --check
@@ -38,3 +46,39 @@ jobs:
 
       - name: check editorconfig
         run: uv run --locked pre-commit run lint-editor --all-files --show-diff-on-failure
+
+  test:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+
+      - name: run tests
+        run: uv run --locked pytest
+
+  e2e:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
+          enable-cache: true
+
+      - name: run end-to-end tests
+        run: uv run --locked --package yggdrasil-e2e --directory tests/e2e pytest

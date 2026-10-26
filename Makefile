@@ -6,7 +6,7 @@
 
 .DEFAULT_GOAL := help
 
-.PHONY: help setup install hooks lock lock-check agent-check check check-duplicate-extraction clean reset
+.PHONY: help setup install hooks lock lock-check fmt agent-check check test e2e check-duplicate-extraction clean reset
 
 # OVERVIEW
 # --------
@@ -32,6 +32,12 @@ lock:  ## update uv.lock
 lock-check:  ## check that uv.lock is up to date
 	uv lock --check
 
+# FORMAT
+# ------
+fmt:  ## format python and apply safe lint fixes
+	uv run --locked ruff check --fix .
+	uv run --locked ruff format .
+
 # VERIFICATION
 # ------------
 agent-check:  ## check the .agent directory layout
@@ -39,6 +45,14 @@ agent-check:  ## check the .agent directory layout
 
 check: lock-check  ## run the full local check
 	uv run --locked pre-commit run --all-files --show-diff-on-failure
+
+# TESTING
+# -------
+test:  ## run the test suite
+	uv run --locked pytest
+
+e2e:  ## run the end-to-end project
+	uv run --locked --package yggdrasil-e2e --directory tests/e2e pytest
 
 # TOOLS
 # -----
