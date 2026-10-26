@@ -48,6 +48,11 @@ revert = "revert earlier commit"
 # source and tests
 "src/**" = ["feat", "fix", "refactor", "perf", "style"]
 "tests/**" = ["test", "fix", "refactor"]
+"tests/*.test.py" = ["test", "chore"]
+"tests/conftest.py" = ["test", "chore"]
+"tests/e2e/**" = ["test", "build", "chore"]
+"tests/README.md" = ["docs", "chore", "test"]
+"pytest.ini" = ["test", "chore"]
 
 # tooling: ci checks and local tools
 "scripts/ci/**" = ["ci", "chore"]

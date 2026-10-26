@@ -8,4 +8,12 @@ dependencies = []
 [dependency-groups]
 dev = [
     "pre-commit>=4.7.0",
+    "pytest>=9.1.1",
+    "ruff>=0.17.2",
 ]
+
+[tool.uv]
+required-version = ">=0.13.1"
+
+[tool.uv.workspace]
+members = ["tests/e2e"]

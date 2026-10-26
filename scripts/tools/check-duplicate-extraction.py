@@ -82,7 +82,7 @@ def read_roots() -> set[str]:
     try:
         text = LIST.read_text(encoding="utf-8")
     except (OSError, UnicodeDecodeError) as exc:
-        raise InputError(MESSAGES["roots.unreadable"].format(error=exc))
+        raise InputError(MESSAGES["roots.unreadable"].format(error=exc)) from exc
 
     roots = set()
     for line in text.splitlines():
@@ -98,13 +98,14 @@ def read_roots() -> set[str]:
 # ==============================================================================
 
 
-def main() -> int:
-    if len(sys.argv) != 2:
+def main(argv: list[str] | None = None) -> int:
+    args = sys.argv[1:] if argv is None else argv
+    if len(args) != 1:
         print(MESSAGES["usage"], file=sys.stderr)
         return EXIT_INPUT
 
     try:
-        text = read_text(sys.argv[1])
+        text = read_text(args[0])
     except OSError as exc:
         print(MESSAGES["task.unreadable"].format(error=exc), file=sys.stderr)
         return EXIT_IO

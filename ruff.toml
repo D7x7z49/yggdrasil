@@ -1,0 +1,25 @@
+# @path[ruff.toml]
+# formatter and linter settings for python code
+
+target-version = "py312"
+line-length = 120
+
+# fixture trees are sample inputs, not code this project owns
+extend-exclude = ["tests/data"]
+
+[lint]
+select = [
+    "B",  # flake8-bugbear
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "I",  # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line length is owned by the formatter and EditorConfig
+]
+
+[format]
+indent-style = "space"
+quote-style = "double"
+line-ending = "lf"
